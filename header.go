@@ -112,9 +112,9 @@ func (n *negotiationHeader) Bytes() []byte {
 
 	var firstByte byte
 	if n.Form {
-		firstByte |= 0x80
+		firstByte |= 0x7F
 	}
-	firstByte |= n.Unused & 0x7F
+	firstByte = firstByte + n.Unused
 
 	buf.WriteByte(firstByte)
 	binary.Write(buf, binary.BigEndian, n.Version)
